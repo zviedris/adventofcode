@@ -46,13 +46,11 @@ func letterToValue(letter byte) int {
 	}
 }
 
-func calculateResultInd(data string) int {
-	part1 := data[:len(data)/2]
-	part2 := string(data[len(data)/2:])
+func calculateResultInd(data string, data1 string, data2 string) int {
 
-	for i := 0; i < len(part1); i++ {
-		if strings.Contains(part2, string(part1[i])) {
-			return letterToValue(part1[i])
+	for i := 0; i < len(data); i++ {
+		if strings.Contains(data1, string(data[i])) && strings.Contains(data2, string(data[i])) {
+			return letterToValue(data[i])
 		}
 	}
 
@@ -62,8 +60,8 @@ func calculateResultInd(data string) int {
 func calculateResult(data []string) int {
 	result := 0
 
-	for i := 0; i < len(data); i++ {
-		result += calculateResultInd(data[i])
+	for i := 0; i < len(data); i += 3 {
+		result += calculateResultInd(data[i], data[i+1], data[i+2])
 	}
 
 	return result
